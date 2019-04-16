@@ -1,0 +1,5 @@
+<p>最近在公司开发遇到的问题：</p>
+<pre><code>由于Oracel varchar类型最大为4000个字符，历史版本的sql脚本使用Oracle提供的TO_CHAR()方法进行对CLOB类型的转换。当CLOB存储字符大于4000时，提示缓冲区内存不够，因此需要在mybatis获取数据时对CLOB类型的数据进行转换。
+
+mybatis提供了handleType属性
+</code></pre>
