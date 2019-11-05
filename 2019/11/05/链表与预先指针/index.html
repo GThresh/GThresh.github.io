@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: 算法进阶 | Hexo</title>
+  <title>链表与预先指针 | Hexo</title>
   
   
 
@@ -44,7 +44,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class="cover  half">
+    <cover class="cover post half">
       
         
   <h1 class="title">Demo</h1>
@@ -216,25 +216,11 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
+      <div class="l_main">
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
 
 
   <section class="meta">
@@ -243,11 +229,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/11/04/HashTable与两数之和/">
-      HashTable与两数之和
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2019/11/05/链表与预先指针/">
+        链表与预先指针
+      </a>
+    </h1>
+  
 
 
       
@@ -275,7 +263,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-11-04</p>
+    <p>2019-11-05</p>
   </a>
 </div>
 
@@ -283,6 +271,24 @@
         
           
             
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -299,44 +305,174 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h5><svg viewbox="0 0 24 24" width="1em" height="1em" class="css-1lc17o4-icon"><path fill-rule="evenodd" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6v-2zm0 4h8v2H6v-2zm10 0h2v2h-2v-2zm-6-4h8v2h-8v-2z"/></svg><span> 题目描述 ( 来源：力扣（LeetCode） 链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a> )<span></span></span></h5><br>&emsp;&emsp;给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。<br><br>&emsp;&emsp;如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。<br><br>&emsp;&emsp;您可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br>##### 示例：<br><br>&gt; 输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>&gt;<br>&gt; 输出：7 -&gt; 0 -&gt; 8<br>&gt;<br>&gt; 原因：342 + 465 = 807<br><br><h5><svg viewbox="0 0 24 24" width="1em" height="1em" class="css-1lc17o4-icon"><path fill-rule="evenodd" d="M5.016 17.995c0 .282.093.517.28.705.188.187.423.297.704.328h12a1.14 1.14 0 0 0 .703-.328.902.902 0 0 0 .281-.658c0-.25-.062-.454-.187-.61l-5.813-9.094V3.972h-1.968v4.366l-5.813 9.094a.875.875 0 0 0-.187.563zM6 21c-.844 0-1.547-.282-2.11-.845-.562-.563-.859-1.283-.89-2.16 0-.594.172-1.126.516-1.596L9 7.822V5.99a.953.953 0 0 1-.703-.282.956.956 0 0 1-.281-.704V3.972c0-.564.187-1.033.562-1.409C8.953 2.188 9.422 2 9.984 2h4.032c.562 0 1.03.188 1.406.563.375.376.562.845.562 1.409v1.033a.956.956 0 0 1-.28.704.953.953 0 0 1-.704.282v1.83l5.484 8.578c.344.47.516 1.002.516 1.596-.031.877-.328 1.597-.89 2.16-.563.563-1.266.845-2.11.845H6z"/></svg> 解题思路：</h5>
+
+<h4 id="一、bug版"><a href="#一、bug版" class="headerlink" title="一、bug版"></a>一、bug版</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span></span>&#123;</span><br><span class="line">        ListNode resultNode = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode tempNode = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        resultNode.val = (l1.val+l2.val)%<span class="number">10</span>+index;</span><br><span class="line">        index = (l1.val+l2.val)/<span class="number">10</span>;</span><br><span class="line">        tempNode = resultNode;</span><br><span class="line">        <span class="keyword">while</span>(l1.next!=<span class="keyword">null</span> &amp;&amp; l2.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tempNode.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            tempNode = tempNode.next;</span><br><span class="line">            l1=l1.next;</span><br><span class="line">            l2=l2.next;</span><br><span class="line">            tempNode.val = (l1.val+l2.val)%<span class="number">10</span>+index;</span><br><span class="line">            index = (l1.val+l2.val)/<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultNode;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;emm…完全不想看自己乱写的代码</p>
+<p>首先：计算每个对应节点之和就是错误的节点（天呐 我写了什么）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resultNode.val = (l1.val+l2.val)%<span class="number">10</span>+index;</span><br></pre></td></tr></table></figure></p>
+<p>其次：当需要返回链表头时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。<br>使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。然后我现在也同样看不懂自己写的是什么逻辑😂😂😂</p>
+<p>最后：站在开发的角度，我脑海中的测试数据：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>l1 = [2,4,3] l2 = [5,6,4]</td>
+<td>这才是程序真正的输入（大声🔈）</td>
+</tr>
+</tbody>
+</table>
+<p>然而实际的测试用例：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>l1=[0,1]，l2=[0,1,2]</td>
+<td>当一个列表比另一个列表长时</td>
+</tr>
+<tr>
+<td>l1=[]，l2=[0,1]</td>
+<td>当一个列表为空时，即出现空列表</td>
+</tr>
+<tr>
+<td>l1=[9,9]，l2=[1]</td>
+<td>求和运算最后可能出现额外的进位，这一点很容易被遗忘（测试老哥饶命！对不起，我全忘了）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="二、预先指针解决链表问题"><a href="#二、预先指针解决链表问题" class="headerlink" title="二、预先指针解决链表问题"></a>二、预先指针解决链表问题</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">addTwoNumbersWithPrePointer</span><span class="params">(ListNode l1, ListNode l2)</span></span>&#123;</span><br><span class="line">        ListNode resultNode = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode tempNode = resultNode;</span><br><span class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l1!=<span class="keyword">null</span> || l2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = l1!=<span class="keyword">null</span> ? l1.val:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> y = l2!=<span class="keyword">null</span> ? l2.val:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> sum = x+y+carry;</span><br><span class="line">            carry = sum/<span class="number">10</span>;</span><br><span class="line">            tempNode.next = <span class="keyword">new</span> ListNode(sum%<span class="number">10</span>);</span><br><span class="line">            tempNode = tempNode.next;</span><br><span class="line">            <span class="keyword">if</span> (l1 != <span class="keyword">null</span>)&#123;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (l2!=<span class="keyword">null</span>) &#123;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//防止最后一位相加溢出</span></span><br><span class="line">        <span class="keyword">if</span>(carry&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            tempNode.next = <span class="keyword">new</span> ListNode(carry);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultNode.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5><svg viewbox="0 0 24 24" width="1em" height="1em" class="css-1lc17o4-icon"><path fill-rule="evenodd" d="M8.995 22a.955.955 0 0 1-.704-.282.955.955 0 0 1-.282-.704V18.01H3.972c-.564 0-1.033-.195-1.409-.586A1.99 1.99 0 0 1 2 15.99V3.97c0-.563.188-1.032.563-1.408C2.94 2.188 3.408 2 3.972 2h16.056c.564 0 1.033.188 1.409.563.375.376.563.845.563 1.409V15.99a1.99 1.99 0 0 1-.563 1.432c-.376.39-.845.586-1.409.586h-6.103l-3.709 3.71c-.22.187-.454.281-.704.281h-.517zm.986-6.01v3.1l3.099-3.1h6.948V3.973H3.972V15.99h6.01zm-3.99-9.013h12.018v2.018H5.991V6.977zm0 4.037h9.014v1.972H5.99v-1.972z"/></svg> 总结</h5>
+
+<p>&emsp;&emsp;自己的算法知识还是太浅薄了，平时写惯了简单的代码，对于稍微需要思考一下的问题大脑不由自主的产生抗拒感。还是要努力加油~ up up</p>
+<p><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2720768737,2695916158&amp;fm=26&amp;gp=0.jpg" alt="\image\tdcq"></p>
+
+      </div>
       
+        <br>
+        
+
+
+  <section class="meta" id="footer-meta">
+    <div class="new-meta-box">
       
-        <div class="readmore">
-          <a href="/2019/11/04/HashTable与两数之和/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-05T22:36:16+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月5日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/链表/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>链表</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/05/链表与预先指针/&title=链表与预先指针 | Hexo&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/11/05/链表与预先指针/&title=链表与预先指针 | Hexo&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/05/链表与预先指针/&title=链表与预先指针 | Hexo&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/算法进阶/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 算法进阶</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
-        
+
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2019/11/04/Spring容器对bean的管理细节/" rel="prev" title="Spring容器对bean的管理细节">
+                                  
+                                      Spring容器对bean的管理细节
+                                  
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
-  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '链表与预先指针',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class="l_side">
   
@@ -412,87 +548,39 @@
         
           
           
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
             
-              <section class="widget list">
-  
+              
+  <section class="widget toc-wrapper">
+    
 <header class="pure">
-  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;强烈推荐</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
-  <div class="content pure">
-    <ul class="entry">
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/">
-          <div class="name">
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;Hexo脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/">
-          <div class="name">
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图床脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com">
-          <div class="name">
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图片在线压缩
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net">
-          <div class="name">
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;生成Favicon
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/">
-          <div class="name">
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;简历主题
-          </div>
-          
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-text"> 题目描述 ( 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/add-two-numbers )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-text"> 解题思路：</span></a></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#一、bug版"><span class="toc-text">一、bug版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、预先指针解决链表问题"><span class="toc-text">二、预先指针解决链表问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-text"> 总结</span></a></li></ol>
+    </li></div>
+  </section>
+
 
             
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
       
@@ -640,6 +728,119 @@
 
 
             
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class="widget list">
+  
+<header class="pure">
+  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;强烈推荐</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="entry">
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/">
+          <div class="name">
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;Hexo脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/">
+          <div class="name">
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图床脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com">
+          <div class="name">
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图片在线压缩
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net">
+          <div class="name">
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;生成Favicon
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/">
+          <div class="name">
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;简历主题
+          </div>
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
           
